@@ -43,9 +43,7 @@ void ScrapMetalLoop();
 void DownStairsLoop();
 void RustyDoorLockpickLoop();
 void DiamondDoorLockpickLoop();
-void TreasureRoom2Loop();
-void TreasureRoomLoop();
-void TreasureRoom1Loop();
+void RustyRoomLoop();
 
 int main() {
   srand(time(NULL));
@@ -104,6 +102,7 @@ void Rooms() {
         howManyScraps = random;
         Sleep(2700);
         cout << "Where now?\n\n";
+        Sleep(700);
         Rooms();
         break;
       }
@@ -146,41 +145,15 @@ void Corridor(){
         Rooms();
       }
       else {
-        cout << "Sorry, that's not an option, enter a real number\n\n";
-        Sleep(1200);
+        cout << "Sorry, that's not an option, TRY AGAIN\n\n";
+        Sleep(1300);
         Corridor();
       }
 }
 
 void RustyRoom() {
   cout << "What do you want to do?\n\n1. Look around\n2. Exit\n\n";
-  int u;
-  cin >> u;
-  if(u == 1){
-    cout << "Where do you want to look?\n\n1. On top of the wardrobe\n2. Under the chair\n3. Behind the wardrobe\n\n";
-    int d;
-    cin >> d;
-    if(d == 1){
-      cout << "Nothing here, just a flower pot\n\n";
-      Sleep(1000);
-      RustyRoom();
-    }
-    else if(d == 2){
-      cout << "Nothing there, just some paper\n\n";
-      Sleep(1000);
-      RustyRoom();
-    }
-    else if(d == 3){
-      hasWoodenSword = true;
-      cout << "Congratulations! You found a wooden sword, your first melee weapon!\n\n";
-      Sleep(1400);
-      RustyRoom();
-    }
-  }
-  else if(u == 2){
-    cout << "You are back at your cell!\n\n";
-    Rooms();
-  }
+  RustyRoomLoop();
 }
 
 void SkeletonFight() {
@@ -252,6 +225,10 @@ void SkeletonFight() {
       int howManyScraps = 0;
       int howManyLockpicks = 0;
       main();
+    }
+    else {
+      cout << "Nope, not a number, try again\n\n";
+      Sleep()
     }
   }
 }
@@ -632,5 +609,49 @@ void TreasureRoom2Loop() {
     cout << "That is not an option, try again\n\n";
     Sleep(1000);
     TreasureRoom2Loop();
+  }
+}
+
+void RustyRoomLoop() {
+  int u;
+  cin >> u;
+  if(u == 1){
+    cout << "Where do you want to look?\n\n1. On top of the wardrobe\n2. Under the chair\n3. Behind the wardrobe\n\n";
+    int d;
+    cin >> d;
+    if(d == 1){
+      cout << "Nothing here, just a flower pot\n\n";
+      Sleep(1000);
+      RustyRoom();
+    }
+    else if(d == 2){
+      cout << "Nothing there, just some paper\n\n";
+      Sleep(1000);
+      RustyRoom();
+    }
+    else if(d == 3){
+      hasWoodenSword = true;
+      cout << "Congratulations! You found a wooden sword, your first melee weapon!\n\n";
+      Sleep(1400);
+      RustyRoom();
+    }
+    else {
+      cout << "Okay, you know that's not an option...\n\n";
+      Sleep(1500);
+      cout << "TRY\n";
+      Sleep(800);
+      cout << "AGAIN\n\n";
+      Sleep(900);
+      RustyRoomLoop();
+    }
+  }
+  else if(u == 2){
+    cout << "You are back at your cell!\n\n";
+    Rooms();
+  }
+  else {
+    cout << "That's not an option, just try again\n\n";
+    Sleep(1200);
+    RustyRoomLoop();
   }
 }
