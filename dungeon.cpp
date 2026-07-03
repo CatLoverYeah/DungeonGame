@@ -18,6 +18,7 @@ bool hasBeatenGoldenDoorMiniboss = false;
 bool hasBow = false;
 bool hasElectricSpell = false;
 bool hasSuperDuperFancyCoolSword = false;
+bool hasSeenRules = false;
 int skeletonHP = 100;
 int playerHP = 150;
 int stamina = 200;
@@ -45,11 +46,16 @@ void DownStairsLoop();
 void RustyDoorLockpickLoop();
 void DiamondDoorLockpickLoop();
 void RustyRoomLoop();
+void DisplayStamina();
+void GameRules();
 
 int main() {
   srand(time(NULL));
   cout << "Your target is to collect items to help you beat the monster at the end of the game!\n\n";
   Sleep(3000);
+  cout << "Do you want to see the game rules?\n\n";
+  Sleep(1000);
+  GameRules();
   cout << "Where do you want to go? (Type in the number)\n\n";
   Rooms();
 }
@@ -163,6 +169,7 @@ void SkeletonFight() {
   cout << "FIGHT!\n\n";
   while(playerHP > 0 && skeletonHP > 0){
         Sleep(900);
+        DisplayStamina();
         DisplayPlayerHP();
         DisplaySkeletonHP();
         Sleep(1800);
@@ -217,6 +224,7 @@ void SkeletonFight() {
       bool hasBow = false;
       bool hasElectricSpell = false;
       bool hasSuperDuperFancyCoolSword = false;
+      bool hasSeenRules = false;
       int skeletonHP = 100;
       int playerHP = 150;
       int stamina = 200;
@@ -240,6 +248,10 @@ void DisplayPlayerHP() {
 
 void DisplaySkeletonHP() {
   cout << "Skeleton HP is " << skeletonHP << "\n\n";
+}
+
+void DisplayStamina() {
+  cout << "Your stamina is " << stamina << "\n";
 }
 
 void SkeletonFightCycle() {
@@ -660,5 +672,22 @@ void RustyRoomLoop() {
     cout << "That's not an option, just try again\n\n";
     Sleep(1200);
     RustyRoomLoop();
+  }
+}
+
+void GameRules() {
+  string jk;
+  cin >> jk;
+  if(jk == "yes" || jk == "Yes") {
+
+  }
+  else if(jk == "no" || jk == "No") {
+    cout << "Okay then\n\n";
+    Sleep(800);
+    
+  }
+  else {
+    cout << "Sorry, that's not an option\n\n";
+    Sleep(1200);
   }
 }
