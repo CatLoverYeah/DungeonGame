@@ -26,6 +26,7 @@ int woodenSwordDamage = 35;
 int punchDamage = 15;
 int howManyScraps = 0;
 int howManyLockpicks = 0;
+int goldenDoorMinibossHP = 250;
 
 void Rooms();
 void Corridor();
@@ -406,6 +407,12 @@ void GoldenDoorMinibossFight() {
           cout << "How do you attack:\n\n1. Punch\n2. Wooden Sword\n3. Bow and Arrow\n4. Electric Spell\n5. Super Duper Fancy Sword :)\n\n";
           int hhh;
           cin >> hhh;
+          switch(hhh) {
+            case 1:
+              goldenDoorMinibossHP -= punchDamage;
+              cout << "You hit him with a punch and dealt " << punchDamage << " damage\n\n";
+              Sleep()
+          }
         }
         else {
           cout << "How do you attack:\n\n1. Punch\n2. Wooden Sword\n3. Bow and Arrow\n4. Electric Spell\n\n";
