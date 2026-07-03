@@ -719,3 +719,41 @@ void GameRulesLoop() {
       cout << "'aight, off you go to your game!\n\n";
       Sleep(1800);
       hasSeenRules = true
+      main();
+    }
+    else if(gj == "no" || gj == "No") {
+      cout << "Sure, whenever you're ready\n\n";
+      Sleep(6000);
+      cout << "Now?\n\n";
+      GameRulesLoop();
+    }
+    else {
+      cout << "Sorry, that's not an option, TRY AGAIN\n\n";
+      Sleep(900);
+      GameRulesLoop();
+    }
+}
+
+void Room13Loop() {
+  string uu;
+        cin >> uu;
+        if(uu == "yes" || uu == "Yes") {
+          cout << "Nice! What will you find...\n\n";
+          Sleep(3000);
+          if(hasBeatenGoldenDoorMiniboss == false) {
+            GoldenDoorMiniboss();
+          }
+          else {
+            GoldenRoom();
+          }
+        }
+        else if(uu == "no" || uu == "No") {
+          cout << "Alright, not now then, then where?\n\n";
+          Room13Search();
+        }
+        else {
+          cout << "Sorry, that's not an option, please try again\n\n";
+          Sleep(1000);
+          Room13Loop();
+        }
+}
