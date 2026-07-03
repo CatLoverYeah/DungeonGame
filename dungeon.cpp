@@ -53,6 +53,7 @@ void DiamondDoorLockpickLoop();
 void RustyRoomLoop();
 void DisplayStamina();
 void GameRules();
+void Room13Loop();
 
 int main() {
   srand(time(NULL));
@@ -373,22 +374,7 @@ void Room13Search() {
     else if(yy == 5) {
       if(hasGoldenKey == true) {
         cout << "You found a golden door, which you just unlocked! Do you wanna go in?\n\n";
-        string uu;
-        cin >> uu;
-        if(uu == "yes" || uu == "Yes") {
-          cout << "Nice! What will you find...\n\n";
-          Sleep(3000);
-          if(hasBeatenGoldenDoorMiniboss == false) {
-            GoldenDoorMiniboss();
-          }
-          else {
-            GoldenRoom();
-          }
-        }
-        else if(uu == "no" || uu == "No") {
-          cout << "Alright, not now then, then where?\n\n";
-          Room13Search();
-        }
+        Room13Loop();
       }
       else {
         cout << "You have found a golden door! But sadly no way to open it.\n\n";
@@ -732,18 +718,4 @@ void GameRulesLoop() {
       Sleep(3500);
       cout << "'aight, off you go to your game!\n\n";
       Sleep(1800);
-      hasSeenRules = true;
-      main();
-    }
-    else if(gj == "no" || gj == "No") {
-      cout << "Sure, whenever you're ready\n\n";
-      Sleep(6000);
-      cout << "Now?\n\n";
-      GameRulesLoop();
-    }
-    else {
-      cout << "Sorry, that's not an option, TRY AGAIN\n\n";
-      Sleep(900);
-      GameRulesLoop();
-    }
-}
+      hasSeenRules = true
