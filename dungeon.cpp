@@ -17,9 +17,14 @@ bool hasHardDrive = false;
 bool hasBeatenGoldenDoorMiniboss = false;
 bool hasBow = false;
 bool hasElectricSpell = false;
-bool hasSuperDuperFancyCoolSword = false;
+bool hasSuperDuperFancyCoolMegaSword = false;
 bool hasSeenRules = false;
+int woodenSwordStamina = 18;
 int skeletonHP = 100;
+int punchStamina = 8;
+int bowStamina = 13;
+int electricSpellStamina = 30;
+int superDuperFancyCoolMegaSwordStamina = 24;
 int playerHP = 150;
 int stamina = 200;
 int bowDamage = 25;
@@ -51,11 +56,13 @@ void GameRules();
 
 int main() {
   srand(time(NULL));
-  cout << "Your target is to collect items to help you beat the monster at the end of the game!\n\n";
-  Sleep(3000);
-  cout << "Do you want to see the game rules?\n\n";
-  Sleep(1000);
-  GameRules();
+  if(hasSeenRules == false) {
+    cout << "Your target is to collect items to help you beat the monster at the end of the game!\n\n";
+    Sleep(3000);
+    cout << "Do you want to see the game rules?\n\n";
+    Sleep(1000);
+    GameRules();
+  }
   cout << "Where do you want to go? (Type in the number)\n\n";
   Rooms();
 }
@@ -223,9 +230,13 @@ void SkeletonFight() {
       bool hasBeatenGoldenDoorMiniboss = false;
       bool hasBow = false;
       bool hasElectricSpell = false;
-      bool hasSuperDuperFancyCoolSword = false;
+      bool hasSuperDuperFancyCoolMegaSword = false;
       bool hasSeenRules = false;
       int skeletonHP = 100;
+      int punchStamina = 10;
+      int bowStamina = 8;
+      int electricSpellStamina = 25;
+      int superDuperFancyCoolMegaSwordStamina = 20;
       int playerHP = 150;
       int stamina = 200;
       int bowDamage = 25;
@@ -233,6 +244,7 @@ void SkeletonFight() {
       int punchDamage = 15;
       int howManyScraps = 0;
       int howManyLockpicks = 0;
+      int goldenDoorMinibossHP = 250;
       main();
     }
     else {
@@ -260,6 +272,7 @@ void SkeletonFightCycle() {
     int h;
     cin >>h;
     if(h == 1){
+      stamina -= punchStamina;
       cout << "You attacked with a punch and dealt " << punchDamage << " damage!\n\n";
       skeletonHP-=punchDamage;
       Sleep(1300);
@@ -268,6 +281,7 @@ void SkeletonFightCycle() {
       Sleep(1300);
     }
     else if(h == 2){
+      stamina -= woodenSwordStamina;
       cout << "You attacked with the Wooden Sword and dealt " << woodenSwordDamage << " damage!\n\n";
       skeletonHP-=woodenSwordDamage;
       Sleep(1300);
@@ -281,6 +295,7 @@ void SkeletonFightCycle() {
     int k;
     cin >> k;
     if(k == 1){
+      stamina -= punchStamina;
       cout << "You attacked with a punch and dealt " << punchDamage << " damage!\n\n";
       skeletonHP-=punchDamage;
       Sleep(1300);
@@ -330,7 +345,8 @@ void Room13Search() {
     else if(yy == 2) {
       cout << "You ate an apple on the table, nice!\n\n";
       Sleep(1400);
-      cout << "It did nothing...\n\n";
+      cout << "It gave you 10 stamina!\n\n";
+      stamina += 10;
       Sleep(1000);
       Room13Search();
     }
@@ -415,8 +431,8 @@ void GoldenDoorMinibossFight() {
   if(hasWoodenSword == true) {
     if(hasBow == true) {
       if(hasElectricSpell == true) {
-        if(hasSuperDuperFancyCoolSword == true) {
-          cout << "How do you attack:\n\n1. Punch\n2. Wooden Sword\n3. Bow and Arrow\n4. Electric Spell\n5. Super Duper Fancy Sword :)\n\n";
+        if(hasSuperDuperFancyCoolMegaSword == true) {
+          cout << "How do you attack:\n\n1. Punch\n2. Wooden Sword\n3. Bow and Arrow\n4. Electric Spell\n5. Super Duper Fancy Cool Mega Sword :)\n\n";
           int hhh;
           cin >> hhh;
           switch(hhh) {
@@ -433,8 +449,8 @@ void GoldenDoorMinibossFight() {
         }
       }
       else {
-        if(hasSuperDuperFancyCoolSword == true) {
-          cout << "How do you attack:\n\n1. Punch\n2. Wooden Sword\n3. Bow and Arrow\n4. Super Duper Fancy Sword :)\n\n";
+        if(hasSuperDuperFancyCoolMegaSword == true) {
+          cout << "How do you attack:\n\n1. Punch\n2. Wooden Sword\n3. Bow and Arrow\n4. Super Duper Fancy Cool Mega Sword :)\n\n";
           int fff;
           cin >> fff;
         }
@@ -679,15 +695,55 @@ void GameRules() {
   string jk;
   cin >> jk;
   if(jk == "yes" || jk == "Yes") {
-
+    cout << "The purpose of the game is to collect items to beat the final monster at the end of the game\n";
+    Sleep(3600);
+    cout << "You have a HP bar and stamina that will display every fight you play\n";
+    Sleep(2600);
+    cout << "Your HP doesn't refresh after a fight, so find food to replenish it\n";
+    Sleep(3500);
+    cout << "Your stamina also doesn't replenish after a fight, so also find collectables for it\n";
+    Sleep(3000);
+    cout << "BUT\n";
+    Sleep(800);
+    cout << "Stamina does go up 5 every time it's your turn in a fight\n\n";
+    Sleep(2800);
+    cout << "Ready to continue?\n\n";
+    GameRulesLoop();
   }
   else if(jk == "no" || jk == "No") {
     cout << "Okay then\n\n";
+    hasSeenRules = true;
     Sleep(800);
-    
+    main();
   }
   else {
     cout << "Sorry, that's not an option\n\n";
     Sleep(1200);
   }
+}
+
+void GameRulesLoop() {
+  string gj;
+    cin >> gj;
+    if(gj == "yes" || gj == "Yes") {
+      cout << "Great! so...\n";
+      Sleep(1000);
+      cout << "The whole point of the game is to beat all the monsters and minibosses\n";
+      Sleep(3500);
+      cout << "'aight, off you go to your game!\n\n";
+      Sleep(1800);
+      hasSeenRules = true;
+      main();
+    }
+    else if(gj == "no" || gj == "No") {
+      cout << "Sure, whenever you're ready\n\n";
+      Sleep(6000);
+      cout << "Now?\n\n";
+      GameRulesLoop();
+    }
+    else {
+      cout << "Sorry, that's not an option, TRY AGAIN\n\n";
+      Sleep(900);
+      GameRulesLoop();
+    }
 }
